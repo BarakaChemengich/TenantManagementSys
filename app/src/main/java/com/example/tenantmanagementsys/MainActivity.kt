@@ -30,5 +30,19 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${tenant.phone}"))
             startActivity(intent)
         }
+        binding.shareButton.setOnClickListener {
+            val tenant = lastTenant
+            if (tenant != null) {
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                     putExtra(Intent.EXTRA_TEXT, tenant.summary())
+                }
+
+                val chooser = Intent.createChooser(intent, "Share tenant details via")
+                startActivity(chooser)
+            } else {
+                Toast.makeText(this, "Save a tenant first", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
