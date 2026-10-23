@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("EMAIL", email)
             startActivity(intent)
             finish() // Destroys LoginActivity after starting MainActivity
         }

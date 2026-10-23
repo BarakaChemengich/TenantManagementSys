@@ -4,7 +4,7 @@
     <data>
         <variable
             name="tenant"
-            type="com.example.tenantmanagementsystemgroupa.Tenant" />
+            type="com.example.tenantmanagementsys.Tenant" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
