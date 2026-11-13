@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.tenantmanagementsys.data.repository.TenantRepository
-import com.example.tenantmanagementsys.ui.tenants.ViewTenantsFragmentArgs
 import com.example.tenantmanagementsys.databinding.FragmentViewTenantsBinding
+import androidx.fragment.app.activityViewModels
+import com.example.tenantmanagementsys.ui.viewmodel.TenantViewModel
 
 class ViewTenantsFragment : Fragment() {
     private var _binding: FragmentViewTenantsBinding? = null
@@ -18,6 +18,7 @@ class ViewTenantsFragment : Fragment() {
     // SAFE ARGS: reads the arguments that arrived with the action.
 // ViewTenantsFragmentArgs was generated from the <argument> in nav_graph.xml
     private val args: ViewTenantsFragmentArgs by navArgs()
+    private val viewModel: TenantViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,11 +47,9 @@ class ViewTenantsFragment : Fragment() {
             }
         }
 // Show every saved tenant as text, one after another
-        val tenants = TenantRepository.tenants
-        if (tenants.isEmpty()) {
-            binding.allTenantsTextView.text = "No tenants yet. Add one from the Dashboard."
-        } else {
-            binding.allTenantsTextView.text = tenants.joinToString("\n\n") { it.summary() }
+        // Observe all tenants from the shared ViewModel
+        viewModel.allTenantsText.observe(viewLifecycleOwner) { text ->
+            binding.allTenantsTextView.text = text
         }
     }
     override fun onDestroyView() {
