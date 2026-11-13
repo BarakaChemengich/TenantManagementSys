@@ -1,4 +1,4 @@
-package com.example.tenantmanagementsys
+package com.example.tenantmanagementsys.ui.auth
 
 import android.content.Intent
 import android.os.Bundle

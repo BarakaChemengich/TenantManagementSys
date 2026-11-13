@@ -1,4 +1,4 @@
-package com.example.tenantmanagementsys
+package com.example.tenantmanagementsys.ui.auth
 
 import android.content.Intent
 import android.net.Uri
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tenantmanagementsys.ui.main.MainActivity
 import com.example.tenantmanagementsys.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

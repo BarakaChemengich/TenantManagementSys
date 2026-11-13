@@ -1,14 +1,16 @@
-package com.example.tenantmanagementsys
+package com.example.tenantmanagementsys.ui.tenants
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.tenantmanagementsys.data.repository.TenantRepository
+import com.example.tenantmanagementsys.ui.tenants.ViewTenantsFragmentArgs
 import com.example.tenantmanagementsys.databinding.FragmentViewTenantsBinding
-import android.content.Intent
-import android.net.Uri
 
 class ViewTenantsFragment : Fragment() {
     private var _binding: FragmentViewTenantsBinding? = null
