@@ -8,16 +8,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.tenantmanagementsys.ui.tenants.AddTenantFragmentDirections
-import com.example.tenantmanagementsys.data.model.Tenant
-import com.example.tenantmanagementsys.data.repository.TenantRepository
 import com.example.tenantmanagementsys.databinding.FragmentAddTenantBinding
-
+import androidx.fragment.app.activityViewModels
+import com.example.tenantmanagementsys.ui.viewmodel.TenantViewModel
 class AddTenantFragment : Fragment() {
 
     private var _binding: FragmentAddTenantBinding? = null
     private val binding get() = _binding!!
-
+    // Shared ViewModel
+    private val viewModel: TenantViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("TENANT_LIFECYCLE", "   AddTenantFragment: onCreate")
@@ -35,32 +34,30 @@ class AddTenantFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("TENANT_LIFECYCLE", "   AddTenantFragment: onViewCreated")
+
+        Log.d("TENANT_LIFECYCLE", "AddTenantFragment: onViewCreated")
 
         binding.saveButton.setOnClickListener {
-            val name = binding.tenantNameEditText.text.toString().trim()
-            val phone = binding.phoneEditText.text.toString().trim()
-            val rent = binding.rentEditText.text.toString().trim()
 
-            // 1. Check if all fields are filled
-            if (name.isEmpty() || phone.isEmpty() || rent.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            val tenant = viewModel.addTenant(
+                binding.tenantNameEditText.text.toString(),
+                binding.phoneEditText.text.toString(),
+                binding.rentEditText.text.toString()
+            )
+
+            if (tenant == null) {
+                Toast.makeText(
+                    requireContext(),
+                    "Please fill in all fields",
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 return@setOnClickListener
             }
-
-            // 2. Validate phone number length (must be at least 10 digits)
-            if (phone.length < 10) {
-                binding.phoneEditText.error = "Enter a valid phone number"
-                binding.phoneEditText.requestFocus()
-                return@setOnClickListener
-            }
-
-            // 3. Save tenant and navigate
-            val tenant = Tenant(name, phone, rent)
-            TenantRepository.addTenant(tenant)
 
             val action = AddTenantFragmentDirections
                 .actionAddTenantFragmentToViewTenantsFragment(tenant)
+
             findNavController().navigate(action)
         }
     }
