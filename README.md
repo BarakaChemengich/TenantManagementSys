@@ -44,7 +44,7 @@ The project was completed collaboratively, with each team member responsible for
 | 3 | Room Database | Wairia Michael | 189948 | [PR #3](https://github.com/BarakaChemengich/TenantManagementSys/pull/3) |
 | 4 | Screens | Stanley Mutiga | 190056 | [PR #2](https://github.com/BarakaChemengich/TenantManagementSys/pull/2) |
 | 5 | Data Integration | Alvin Muchiri | 175883 | [PR #4](https://github.com/BarakaChemengich/TenantManagementSys/pull/4) |
-| 6 | Release | Michelle Mengich | 189914 | To be added after release PR creation |
+| 6 | Release | Michelle Mengich | 189914 | [PR #5](https://github.com/BarakaChemengich/TenantManagementSys/pull/5) |
 
 ## Version Information
 
